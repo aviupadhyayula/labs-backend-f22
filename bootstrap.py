@@ -2,13 +2,21 @@ import os
 from app import db, DB_FILE
 
 def create_user():
-    print("TODO: Create a user called josh")
+    from models import User
+    import bcrypt
+    josh = User(username='josh', email='josh@seas.upenn.edu', password=bcrypt.hashpw('password'.encode('utf-8'), bcrypt.gensalt()))
+    db.session.add(josh)
+    db.session.commit()
 
 def load_data():
-    from models import *
-    print("TODO: Load in clubs.json to the database.")
-
-
+    from utils import create_club
+    import json
+    with open('clubs.json', 'r') as f:
+        data = json.load(f)
+        for entry in data:
+            create_club(entry)
+    import scraper
+    scraper.scrape_ocwp()
 
 # No need to modify the below code.
 if __name__ == '__main__':
