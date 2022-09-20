@@ -4,6 +4,8 @@
 
 Check out this [Notion](https://www.notion.so/Penn-Labs-Technical-Backend-Documentation-Upadhyayula-332ac20b297644c89511fd3a4e172b3a) for the documentation! I've also submitted it as a PDF in this repository.
 
+Additional packages I used in development are located in the Pipfile. For further information on usecases, refer to the above Notion documentation.
+
 ## Installation
 
 1. Click the green "use this template" button to make your own copy of this repository, and clone it. Make sure to create a **private repository**.
