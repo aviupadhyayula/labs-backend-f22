@@ -4,6 +4,8 @@
 
 Check out this [Notion](https://www.notion.so/Penn-Labs-Technical-Backend-Documentation-Upadhyayula-332ac20b297644c89511fd3a4e172b3a) for the documentation! I've also submitted it as a PDF in this repository.
 
+Note that the account username='josh', password='password' can be used for testing. Every club that exists out of the box is owned by Josh.
+
 Additional packages I used in development are noted in the Pipfile. For further information on usecases, refer to the above Notion documentation.
 
 ## Installation
