@@ -24,6 +24,11 @@ owner_to_club = db.Table('owner_to_club',
     db.Column('club_id', db.Integer, db.ForeignKey('club.id'))
 )
 
+file_to_club = db.Table('file_to_club',
+    db.Column('club_id', db.Integer, db.ForeignKey('club.id')),
+    db.Column('file_id', db.Integer, db.ForeignKey('file.id'))
+)
+
 class Club(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     code = db.Column(db.String(255), unique=True, nullable=True)
@@ -33,6 +38,7 @@ class Club(db.Model):
     tags = db.relationship('Tag', secondary=tag_to_club, back_populates='clubs')
     members = db.relationship('User', secondary=user_to_club, back_populates='clubs')
     favorites = db.relationship('User', secondary=favorites, back_populates='favorites')
+    files = db.relationship('File', secondary=file_to_club, back_populates='club')
     def to_dict(self):
         return {'id': self.id, 'code': self.code, 'name': self.name, 'description': 
                 self.description, 'membership_count': len(self.members), 'tags': 
@@ -66,4 +72,10 @@ class Comment(db.Model):
     club_id = db.Column(db.Integer, nullable=False)
     parent_id = db.Column(db.Integer, nullable=True)
     def to_dict(self):
-        return {'id': self.id, 'user': self.user_id, 'club': self.club_id, 'content': self.content, 'parent': self.parent_id}
+        return {'id': self.id, 'user': User.query.get(self.user_id).username, 'club': Club.query.get(self.club_id).code, 'content': self.content, 'parent': self.parent_id}
+
+class File(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(255), unique=True)
+    path = db.Column(db.Text, unique=True)
+    club = db.relationship('Club', secondary=file_to_club, back_populates='files')

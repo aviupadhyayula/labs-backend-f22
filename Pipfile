@@ -16,6 +16,7 @@ flask-login = "*"
 requests = "*"
 bs4 = "*"
 pytest = "*"
+flask-caching = "*"
 
 [requires]
 python_version = "3.7"

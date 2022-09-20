@@ -10,13 +10,18 @@ def create_user():
 
 def load_data():
     from utils import create_club
+    from models import User
+    josh = User.query.filter_by(username='josh').first()
     import json
     with open('clubs.json', 'r') as f:
         data = json.load(f)
         for entry in data:
-            create_club(entry)
+            club = create_club(entry)
+            club.owner = 'josh'
+            club.members.append(josh)
+            db.session.commit()
     import scraper
-    scraper.scrape_ocwp()
+    scraper.main()
 
 # No need to modify the below code.
 if __name__ == '__main__':

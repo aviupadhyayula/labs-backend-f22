@@ -90,3 +90,14 @@ def file_is_allowed(filename):
         file_extension = filename[i] + file_extension
         i -= 1
     return file_extension.lower() in ALLOWED_EXTENSIONS
+
+def make_response(status, message, code):
+    status_code = 'unsuccessful'
+    if status:
+        status_code = 'successful'
+    from flask import jsonify
+    response = {
+        'status': status_code, 
+        'message': message
+    }
+    return jsonify(response), code
